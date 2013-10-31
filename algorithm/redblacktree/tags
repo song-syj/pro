@@ -1,0 +1,106 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+BLACK	rbtree.h	/^typedef enum rbcolor{BLACK,RED} rbcolor;$/;"	e	enum:rbcolor
+BLACK	rbtree_augment.h	/^typedef enum rbcolor{BLACK,RED} rbcolor;$/;"	e	enum:rbcolor
+Bool	rbtree.h	6;"	d
+Bool	rbtree_augment.h	6;"	d
+False	rbtree.h	5;"	d
+False	rbtree_augment.h	5;"	d
+MAXSTACKSIZE	rbtree.c	5;"	d	file:
+MAXSTACKSIZE	rbtree_augment.c	5;"	d	file:
+RED	rbtree.h	/^typedef enum rbcolor{BLACK,RED} rbcolor;$/;"	e	enum:rbcolor
+RED	rbtree_augment.h	/^typedef enum rbcolor{BLACK,RED} rbcolor;$/;"	e	enum:rbcolor
+True	rbtree.h	4;"	d
+True	rbtree_augment.h	4;"	d
+_RB_TREE_H	rbtree.h	2;"	d
+_RB_TREE_H	rbtree_augment.h	2;"	d
+color	rbtree.h	/^	rbcolor color;$/;"	m	struct:rbnode
+color	rbtree_augment.h	/^	rbcolor color;$/;"	m	struct:rbnode
+compare	rbtree.h	/^	rbtree_compare compare;$/;"	m	struct:rbtree
+compare	rbtree_augment.h	/^	rbtree_compare compare;$/;"	m	struct:rbtree
+compare	testrbtree.c	/^compare(void *x, void *y)$/;"	f
+data	rbtree.h	/^	void *data;$/;"	m	struct:rbnode
+data	rbtree_augment.h	/^	void *data;$/;"	m	struct:rbnode
+delete_rbnode	rbtree.c	/^delete_rbnode(rbnode *node)$/;"	f
+delete_rbnode	rbtree_augment.c	/^delete_rbnode(rbnode *node)$/;"	f
+key	rbtree.h	/^	void *key;$/;"	m	struct:rbnode
+key	rbtree_augment.h	/^	void *key;$/;"	m	struct:rbnode
+left	rbtree.h	/^	struct rbnode *left;$/;"	m	struct:rbnode	typeref:struct:rbnode::rbnode
+left	rbtree_augment.h	/^	struct rbnode *left;$/;"	m	struct:rbnode	typeref:struct:rbnode::rbnode
+main	testrbtree.c	/^main(int argc, char* argv[])$/;"	f
+new_rbnode	rbtree.c	/^new_rbnode(void)$/;"	f
+new_rbnode	rbtree_augment.c	/^new_rbnode(void)$/;"	f
+new_rbtree	rbtree.c	/^new_rbtree(void)$/;"	f
+new_rbtree	rbtree_augment.c	/^new_rbtree(void)$/;"	f
+nil	rbtree.h	/^	rbnode *nil;$/;"	m	struct:rbtree
+nil	rbtree_augment.h	/^	rbnode *nil;$/;"	m	struct:rbtree
+parent	rbtree.h	/^	struct rbnode *parent;$/;"	m	struct:rbnode	typeref:struct:rbnode::rbnode
+parent	rbtree_augment.h	/^	struct rbnode *parent;$/;"	m	struct:rbnode	typeref:struct:rbnode::rbnode
+rbcolor	rbtree.h	/^typedef enum rbcolor{BLACK,RED} rbcolor;$/;"	g
+rbcolor	rbtree.h	/^typedef enum rbcolor{BLACK,RED} rbcolor;$/;"	t	typeref:enum:rbcolor
+rbcolor	rbtree_augment.h	/^typedef enum rbcolor{BLACK,RED} rbcolor;$/;"	g
+rbcolor	rbtree_augment.h	/^typedef enum rbcolor{BLACK,RED} rbcolor;$/;"	t	typeref:enum:rbcolor
+rbnode	rbtree.h	/^typedef struct rbnode{$/;"	s
+rbnode	rbtree.h	/^}rbnode;$/;"	t	typeref:struct:rbnode
+rbnode	rbtree_augment.h	/^typedef struct rbnode{$/;"	s
+rbnode	rbtree_augment.h	/^}rbnode;$/;"	t	typeref:struct:rbnode
+rbtree	rbtree.h	/^typedef struct rbtree{$/;"	s
+rbtree	rbtree.h	/^}rbtree;$/;"	t	typeref:struct:rbtree
+rbtree	rbtree_augment.h	/^typedef struct rbtree{$/;"	s
+rbtree	rbtree_augment.h	/^}rbtree;$/;"	t	typeref:struct:rbtree
+rbtree_compare	rbtree.h	/^typedef int (*rbtree_compare)(void *, void *);$/;"	t
+rbtree_compare	rbtree_augment.h	/^typedef int (*rbtree_compare)(void *, void *);$/;"	t
+rbtree_create	rbtree.c	/^rbtree_create(rbtree_compare compare, rbtree_visit visit)$/;"	f
+rbtree_create	rbtree_augment.c	/^rbtree_create(rbtree_compare compare, rbtree_visit visit)$/;"	f
+rbtree_delete	rbtree.c	/^rbtree_delete(rbtree *tree, void *key)$/;"	f
+rbtree_delete	rbtree_augment.c	/^rbtree_delete(rbtree *tree, void *key)$/;"	f
+rbtree_delete_fixup	rbtree.c	/^rbtree_delete_fixup(rbtree *tree, rbnode *x)$/;"	f	file:
+rbtree_delete_fixup	rbtree_augment.c	/^rbtree_delete_fixup(rbtree *tree, rbnode *x)$/;"	f	file:
+rbtree_destroy	rbtree.c	/^rbtree_destroy(rbtree *tree, rbnode *node)$/;"	f
+rbtree_destroy	rbtree_augment.c	/^rbtree_destroy(rbtree *tree, rbnode *node)$/;"	f
+rbtree_display	rbtree.c	/^rbtree_display(rbtree *tree)$/;"	f
+rbtree_display	rbtree_augment.c	/^rbtree_display(rbtree *tree)$/;"	f
+rbtree_inorder_walk	rbtree.c	/^rbtree_inorder_walk(rbtree *tree, rbnode *node)$/;"	f
+rbtree_inorder_walk	rbtree_augment.c	/^rbtree_inorder_walk(rbtree *tree, rbnode *node)$/;"	f
+rbtree_insert	rbtree.c	/^rbtree_insert(rbtree *tree, void *key, void *data)$/;"	f
+rbtree_insert	rbtree_augment.c	/^rbtree_insert(rbtree *tree, void *key, void *data)$/;"	f
+rbtree_insert_fixup	rbtree.c	/^rbtree_insert_fixup(rbtree *tree, rbnode *z)$/;"	f	file:
+rbtree_insert_fixup	rbtree_augment.c	/^rbtree_insert_fixup(rbtree *tree, rbnode *z)$/;"	f	file:
+rbtree_max	rbtree.c	/^rbtree_max(rbtree *tree, rbnode *x)$/;"	f	file:
+rbtree_max	rbtree_augment.c	/^rbtree_max(rbtree *tree, rbnode *x)$/;"	f	file:
+rbtree_min	rbtree.c	/^rbtree_min(rbtree *tree, rbnode *x)$/;"	f	file:
+rbtree_min	rbtree_augment.c	/^rbtree_min(rbtree *tree, rbnode *x)$/;"	f	file:
+rbtree_postorder_walk	rbtree.c	/^rbtree_postorder_walk(rbtree *tree, rbnode *node)$/;"	f
+rbtree_postorder_walk	rbtree_augment.c	/^rbtree_postorder_walk(rbtree *tree, rbnode *node)$/;"	f
+rbtree_predecessor	rbtree.c	/^rbtree_predecessor(rbtree *tree, rbnode *x)$/;"	f	file:
+rbtree_predecessor	rbtree_augment.c	/^rbtree_predecessor(rbtree *tree, rbnode *x)$/;"	f	file:
+rbtree_preorder_walk	rbtree.c	/^rbtree_preorder_walk(rbtree *tree, rbnode *node)$/;"	f
+rbtree_preorder_walk	rbtree_augment.c	/^rbtree_preorder_walk(rbtree *tree, rbnode *node)$/;"	f
+rbtree_search	rbtree.c	/^rbtree_search(rbtree *tree, void *key)$/;"	f
+rbtree_search	rbtree_augment.c	/^rbtree_search(rbtree *tree, void *key)$/;"	f
+rbtree_successor	rbtree.c	/^rbtree_successor(rbtree *tree, rbnode *x)$/;"	f	file:
+rbtree_successor	rbtree_augment.c	/^rbtree_successor(rbtree *tree, rbnode *x)$/;"	f	file:
+rbtree_transplant	rbtree.c	/^rbtree_transplant(rbtree *tree, rbnode *u, rbnode *v)$/;"	f	file:
+rbtree_transplant	rbtree_augment.c	/^rbtree_transplant(rbtree *tree, rbnode *u, rbnode *v)$/;"	f	file:
+rbtree_visit	rbtree.h	/^typedef void (*rbtree_visit)(rbnode *);$/;"	t
+rbtree_visit	rbtree_augment.h	/^typedef void (*rbtree_visit)(rbnode *);$/;"	t
+right	rbtree.h	/^	struct rbnode *right;$/;"	m	struct:rbnode	typeref:struct:rbnode::rbnode
+right	rbtree_augment.h	/^	struct rbnode *right;$/;"	m	struct:rbnode	typeref:struct:rbnode::rbnode
+root	rbtree.h	/^	rbnode *root;$/;"	m	struct:rbtree
+root	rbtree_augment.h	/^	rbnode *root;$/;"	m	struct:rbtree
+rotate_left	rbtree.c	/^rotate_left(rbtree *tree, rbnode *x)$/;"	f	file:
+rotate_left	rbtree_augment.c	/^rotate_left(rbtree *tree, rbnode *x)$/;"	f	file:
+rotate_right	rbtree.c	/^rotate_right(rbtree *tree, rbnode *x)$/;"	f	file:
+rotate_right	rbtree_augment.c	/^rotate_right(rbtree *tree, rbnode *x)$/;"	f	file:
+size	rbtree_augment.h	/^	unsigned int size;$/;"	m	struct:rbnode
+stack	rbtree.c	/^static rbnode *stack[MAXSTACKSIZE];$/;"	v	file:
+stack	rbtree_augment.c	/^static rbnode *stack[MAXSTACKSIZE];$/;"	v	file:
+top	rbtree.c	/^static int top = 0;$/;"	v	file:
+top	rbtree_augment.c	/^static int top = 0;$/;"	v	file:
+visit	rbtree.h	/^	rbtree_visit visit;$/;"	m	struct:rbtree
+visit	rbtree_augment.h	/^	rbtree_visit visit;$/;"	m	struct:rbtree
+visit	testrbtree.c	/^visit(rbnode *node)$/;"	f
