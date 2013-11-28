@@ -1,0 +1,15 @@
+The program is just a test for ttyS1.
+
+you can hit the command "make" to compile
+the program and generate the execute file
+call "UART".And the program is executed by
+a command "./UART 'number'".The number in-
+dicate the device that is used for commun-
+ication.For example "./UART 1" means using
+the ttyS1 for communication.
+
+The  step above generate the execute file
+that runs in the arm linux.If you need a
+program for linux ,just modify the Makefile
+and let CC = gcc in the content.And make
+again.
