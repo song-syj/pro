@@ -5,20 +5,9 @@
 /* 2.58 */
 char is_big_endian()
 {
-	union {
-		short s;
-		char c[sizeof(short)];
-	}un;
+	short x = 1;
 
-	un.s = 0x1234;
-
-	if(un.c[sizeof(short) - 1] == 0x34)
-		return 1;
-	else if(un.c[0] == 0x34)
-		return 0;
-	else
-		return -1;
-	
+	return !*(char *)&x;
 }
 
 /* 2.59 */
@@ -48,7 +37,7 @@ char int_shifts_are_logical()
 int sra(int x, int k)
 {
 	int xsrl = (unsigned) x >> k;
-	int sign = 1 << (sizeof(int) << 3 - k -1);
+	int sign = 1 << (sizeof(int) << 3) - k -1;
 	return ((sign << k) - (sign  & xsrl) << 1) + xsrl;
 }
 
@@ -57,7 +46,7 @@ unsigned srl(unsigned x, int k)
 {
 	unsigned xsra = (int) x >> k;
 	unsigned sign = 1 << (sizeof(int) << 3) - k - 1;
-	return ~(sign << k -sign << 1) & xsra;
+	return ~((sign << k) -sign << 1) & xsra;
 }
 
 /* 2.64 */
@@ -135,17 +124,15 @@ int int_size_is_at_least_16()
 /* 2.68 */
 
 int lower_bits(int x, int n) {
-	int mask = 1 << (n - 1);
+	int mask = 1 << (n - 1)
 		mask |= ~(~0 << (n - 1));
 
 	return x & mask;
 }
-/* another solution */
+
 int lower_bits(int x, int n)
 {
 	int mask = ~(~0 << 1 << (n - 1));
 
 	return x & mask;
 }
-
-
