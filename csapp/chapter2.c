@@ -136,3 +136,17 @@ int lower_bits(int x, int n)
 
 	return x & mask;
 }
+
+/* 2.69 */
+
+/*
+ * Do rotate right shift. Assume 0 <= n < w
+ */
+
+unsigned rotate_right(unsigned x, int n) {
+	
+	unsigned char w = sizeof(x) << 3;
+	n && x = x >> n | x << w - n;
+	
+	return x;
+}
