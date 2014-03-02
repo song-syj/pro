@@ -1,26 +1,29 @@
 #include<stdio.h>
 #include<stdlib.h>
+#include<stdint.h>
 #include<time.h>
 
+
+
 typedef struct rsa_key {
-	 unsigned e;
-	 unsigned p;
-	 unsigned q;
-	 unsigned long d;
-	 unsigned long n;
+	 uint64_t e;
+	 uint64_t p;
+	 uint64_t q;
+	 uint64_t d;
+	 uint64_t n;
 }rsa_key;
 
-unsigned randfrom(unsigned begin, unsigned end)
+uint64_t randfrom(uint64_t begin, uint64_t end)
 {
 	 srand(time(NULL));
-	 return (begin + (unsigned)((double)rand() / (RAND_MAX) * (end - begin + 1)));
+	 return (begin + (uint64_t)((double)rand() / (RAND_MAX) * (end - begin + 1)));
 }
 
 
-unsigned mod_pow(unsigned x, unsigned pow,
-				 unsigned long long mod)
+uint64_t mod_pow(uint64_t x, uint64_t pow,
+				 uint64_t mod)
 {
-	 unsigned long long res, num;
+	 uint64_t res, num;
 
 	 num = x % mod;
 	 for(res = 1; pow; pow >>= 1) {
@@ -33,11 +36,11 @@ unsigned mod_pow(unsigned x, unsigned pow,
 
 }
 
-int witness(unsigned x, unsigned num) 
+int witness(uint64_t x, uint64_t num) 
 { 
-	 unsigned t, u; 
-	 unsigned long long x0, x1; 
-	 long long i; 
+	 uint64_t t, u; 
+	 uint64_t x0, x1; 
+	 int64_t i; 
 
 
 	 t = 0; 
@@ -65,10 +68,10 @@ int witness(unsigned x, unsigned num)
 	 return 0; 
 } 
 
-int miller_rabin(unsigned num, unsigned times)
+int32_t miller_rabin(uint64_t num, uint64_t times)
 {
-	 unsigned x;
-	 int i;
+	 uint64_t x;
+	 int32_t i;
 
 	 if(!(num & 1))
 		  return 0;
@@ -89,7 +92,7 @@ typedef struct reminder {
 	 long long y;
 }reminder;
 
-reminder euclid_gcd(unsigned long long a, unsigned long long b)
+reminder euclid_gcd(uint64_t a, uint64_t b)
 {
 	 reminder rd, rdplus;
 	 if (b == 0) {
@@ -110,20 +113,25 @@ reminder euclid_gcd(unsigned long long a, unsigned long long b)
 
 rsa_key rsa_generator()
 {
-	 unsigned p ;
-	 unsigned q, e;
-	 unsigned long long phi, d, n;
+	 uint64_t p ;
+	 uint64_t q, e;
+	 uint64_t phi, d, n;
 
 	 rsa_key key;
 	 reminder rd;
 
-	 p = randfrom(0x80000000,0xffffffff);
-	 while((q = randfrom(0x80000000,0xffffffff)) == p);
-
-	 phi = (p - 1) * (q - 1);
+	 do {
+		  p = randfrom(0x00008000,0x0000ffff);
+	 }while(!miller_rabin(p, 10));
+	 
+	 do {
+		  q = randfrom(0x00008000,0x0000ffff);
+	 }while(!miller_rabin(q, 10) || p == q);
+	 
+	 phi = ((uint64_t)p - 1) * (q - 1);
 	 n = p * q;
 	 
-	 e = 10001;
+	 e = 1000001;
 	 
 	 while((rd = euclid_gcd(e , phi)).div != 1)  e += 2;
 
@@ -141,40 +149,40 @@ rsa_key rsa_generator()
 	 return key;
 }
 
-unsigned rsa_encryp(unsigned info, rsa_key key)
+uint64_t rsa_encryp(uint64_t info, rsa_key key)
 {
 	 return mod_pow(info, key.e, key.n);
 }
 
-unsigned rsa_decryp(unsigned info, rsa_key key)
+uint64_t rsa_decryp(uint64_t info, rsa_key key)
 {
 	 return mod_pow(info, key.d, key.n);
 }
 
 
-int main()
+int32_t main()
 {
-	 unsigned message;
-	 unsigned ciphertext;
+	 uint64_t message;
+	 uint64_t ciphertext;
 	 
 	 rsa_key key;
-	 while(scanf("%u", &message) != EOF) {
+	 while(scanf("%llu", &message) != EOF) {
 
 		  key = rsa_generator();
-		  printf("message: %d\n", message);
+		  printf("message: %llu\n", message);
 		  printf("key { \n");
-		  printf("\t e = %u\n", key.e);
-		  printf("\t d = %lu\n", key.d);
-		  printf("\t p = %u\n", key.p);
-		  printf("\t q = %u\n", key.q);
-		  printf("\t n = %lu\n", key.n);
+		  printf("\t e = %llu\n", key.e);
+		  printf("\t d = %llu\n", key.d);
+		  printf("\t p = %llu\n", key.p);
+		  printf("\t q = %llu\n", key.q);
+		  printf("\t n = %llu\n", key.n);
 		  printf("} \n");
 			   
 		  ciphertext = rsa_encryp(message, key);
 		  message = rsa_decryp(ciphertext, key);
 
-		  printf("ciphertext: %d\n", ciphertext);
-		  printf("message: %d\n", message);
+		  printf("ciphertext: %llu\n", ciphertext);
+		  printf("message: %llu\n", message);
 	 }
 		  
 	 return 0;
