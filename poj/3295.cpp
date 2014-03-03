@@ -13,13 +13,13 @@ int main()
 	char strbak[101];
 	
 	char p, q, r, s, t;
-	char prev, x, y, op;
+	char x, y, op; 
 	int status, i;
 
 	while(cin >> str ) {
 		if(strcmp(str,"0") == 0)
 			break;
-		x = 0xF;
+		x = 1;
 		for(status = 0; status < 32; status++) {
 			p = (status & 0x10) >> 4;
 			q = (status & 0x08) >> 3;
@@ -27,7 +27,6 @@ int main()
 			s = (status & 0x02) >> 1;
 			t = (status & 0x01);
 
-			
 			for(i = 0; str[i] != '\0'; i++) {
 				switch(str[i]) {
 				case 'p': strbak[i] = p; break;
@@ -56,11 +55,12 @@ int main()
 						switch(op) {
 						case 'K': x = y & x; break;
 						case 'A': x = y | x; break;
-						case 'C': x = ~(y & ~x); break;
-						case 'E': x = !(y ^ x); break;
+						case 'C': x = !y | x; break;
+						case 'E': x = y == x; break;
 						default: cout << "error" << endl;
 							exit(1);
 						}
+						
 						stk.push(x);
 					} else {
 						if(y == 'N') {
@@ -74,12 +74,12 @@ int main()
 					}
 				}
 			}
-			if (status == 0)
-				prev = x;
-			else if(prev != x)
+			
+			if(x == 0)
 				break;
 		}
-		if(prev == x)
+		
+		if(x == 1)
 			cout << "tautology" << endl;
 		else
 			cout << "not" << endl;
