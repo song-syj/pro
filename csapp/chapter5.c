@@ -131,3 +131,77 @@ void *optimized_memset(void *s, int c, size_t n)
 }
 
 /* 5.20 */
+
+double poly_optimized(double a[], double x, int degree)
+{
+    long int i;
+    double result = 0;
+    double s = 0, powx4 = 1;
+    double x2 = x*x;
+    double x4 = x2*x2;
+    long int limit = degree-3;
+    for(i = 0; i <= limit; i += 4)
+    {
+        double v1 = a[i] + a[i+1]*x;
+        double v2 = a[i+2] + a[i+3]*x;
+        v1 = v1 + v2 * x2;
+        s = s + v1 * powx4;
+        powx4 *= x4;
+    }
+
+    for(; i < degree; ++i)
+    {
+        s += a[i]*powx4;
+        powx4 *= x;
+    }
+    return s;
+}
+
+
+/* 5.21 */
+
+void psum3(float a[], float p[], long int n)
+{
+	 long int i;
+	 float val1, val2, last;
+	 p[0] = a[0];
+	 last = a[0];
+	 
+	 for(i = 1; i < n-1; i+=2) {
+		  val1 = last + a[i];
+		  val2 = last + (a[i] + a[i+1]);
+		  p[i] = val1;
+		  p[i+1] =val2;
+		  last = val2;
+	 }
+
+	 if (i < n)
+		  p[i] = p[i-1] + a[i];
+	 }
+}
+
+/* 5.22 */
+
+/* choose B; */
+/* B, speedup = 1 /(0.7+0.3/3) = 1.25; */
+/* C, speedup = 1 /(0.5+0.5/1.5) < 1.25; */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
