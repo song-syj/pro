@@ -49,17 +49,17 @@ trie_insert(_trie_node *root, char *str)
 }
 
 void
-trie_print(_trie_node *pnode, char *str, int i)
+trie_print(_trie_node *pnode, char *str, int index)
 {
 	if(pnode == NULL)
 		return;
-	*(str+i) = pnode->data;
+	*(str+index) = pnode->data;
 	if( pnode->is_word) {
-		*(str+i+1) = '\0';
+		*(str+index+1) = '\0';
 		cout << str << endl;
 	}
 	for(int i=0; i < ALPHABET_NUM; i++) {
-		trie_print(pnode->next[i], str, i+1);
+		trie_print(pnode->next[i], str, index+1);
 	}
 	
 }
@@ -87,6 +87,34 @@ trie_delete(_trie_node *root)
 	delete root;
 }
 
+bool
+trie_search(_trie_node *root, char *str)
+{
+	char *pstr;
+	_trie_node *pnode;
+	int offset;
+	if(root == NULL || *str == '\0')
+		return false;
+	
+	pstr = str;
+	pnode = root;
+	
+	while(*pstr) {
+		offset = *pstr - ALP_BASE;
+		pnode = pnode->next[offset];
+		if(pnode == NULL) {
+			return false;
+		}
+		pstr++;
+	}
+	
+	if(pnode->is_word)
+		return true;
+	else
+		return false;
+	
+}
+
 int
 main()
 {
@@ -95,16 +123,30 @@ main()
 	_trie_node *root;
 	
 	root = trie_create();
+	cout << "input the number of letter:";
 	cin >> size;
+	cout << "input them:" << endl;
 	
 	for(int i = 0; i < size; i++){
 		cin >> str;
 		trie_insert(root, str);
 	}
-	
-	trie_print_all(root, str);
 
+	cout << "dictionary:" << endl;
+	trie_print_all(root, str);
+	cout << endl;
+	
+	cout << "find what letter: ";
+	while(cin >> str) {
+		if(trie_search(root, str))
+			cout << "Find!" << endl;
+		else
+			cout << "Not exist" << endl;
+		cout << "find what letter: ";
+	}
+	
 	trie_delete(root);
+	
 	return 0;
 }
 
