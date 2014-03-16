@@ -1,4 +1,4 @@
-SOURCE = 1753_2.cpp 
+SOURCE = 3080.cpp 
 CC = g++
 HEADER =
 CFLAG = -I./lib -g -Wall
@@ -18,4 +18,4 @@ $(OBJ): $(SOURCE)
 .PHONY: clean
 
 clean:
-	rm $(TARGET) $(OBJ) 
+	rm $(TARGET) $(OBJ) *.o
