@@ -35,7 +35,8 @@
 	  (print *db* out))))
 
 (defun load-db (filename)
-  (with-open-file (in filename)
+  (with-open-file (in filename
+					  :direction :input)
 	(with-standard-io-syntax
 	  (setf *db* (read in)))))
 
@@ -57,3 +58,14 @@
 	   (if artist (equal (getf cd :artist) artist) t)
 	   (if rating (equal (getf cd :rating) rating) t)
 	   (if ripped-p (equal (getf cd :ripped) ripped) t))))
+
+(defun update (selector-fn &key title artist rating (ripped nil ripped-p))
+  (setf *db*
+		(mapcar
+		 #'(lambda (row)
+			 (when (funcall selector-fn row)
+			   (if title (setf (getf row :title) title))
+			   (if artist (setf (getf row :artist) artist))
+			   (if rating (setf (getf row :rating) rating))
+			   (if ripped-p (setf (getf row :ripped) ripped)))
+			 row) *db*)))
