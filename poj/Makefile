@@ -1,4 +1,4 @@
-SOURCE = 1753_2.cpp 
+SOURCE = 1035.cpp 
 CC = g++
 HEADER =
 CFLAG = -I./lib -g -Wall
