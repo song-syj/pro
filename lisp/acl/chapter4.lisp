@@ -1,0 +1,13 @@
+;;1
+(defun quarter-turn (arr)
+  (let ((dim (array-dimensions arr)))
+	(let ((d1 (first dim))
+		  (d2 (second dim))
+		  (new (make-array (reverse dim))))
+	  (do ((i 0 (+ i 1)))
+		  ((= i d1))
+		(do ((j 0 (+ j 1)))
+			((= j d2))
+		  (setf (aref new j (- (- d1  1) i))
+				(aref arr i j))))
+	  new)))
