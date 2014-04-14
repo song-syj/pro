@@ -31,5 +31,92 @@
 		0)))
 		  
 ;; 5
-(defun precedes (x v)
-  ())
+(defun precedes-recur (x v)
+  (let ((len (length v)))
+	(cond ((< len 2)
+		   nil)
+		  ((eql x (aref v 1))
+		   (adjoin (aref v 0) (precedes-recur x (subseq v 1))))
+		  (t (precedes-recur x (subseq v 1))))))
+
+(defun precedes-iter (x v)
+  (let ((l (length v))
+		(prec nil))
+	(if (< l 2)
+		nil
+		(dotimes (i (- l 1) prec)
+		  (when (eql x (aref v (+ i 1)))
+			(setf prec (adjoin (aref v i) prec)))))))
+
+(defun presedes (x v)
+  (let (acc (v1 (concatenate 'vector v)))
+    (dotimes (i (length v1))
+      (if (and (eql x (svref v1 i)) (< 0 i))
+	  (push (svref v1 (- i 1)) acc)))
+    (remove-duplicates acc)))
+
+;; 6
+
+(defun intersperse-recur (obj lst)
+  (if (<= (length lst) 1)
+	  lst
+	  (append (list (car lst) obj) (intersperse obj (cdr lst)))))
+
+(defun intersperse-iter (obj lst)
+  (let ((new nil))
+	(dolist (elt lst (reverse new))
+	  (if new
+		  (push obj new))
+	  (push elt new))))
+
+;; 7
+
+(defun diff-pair-cur (lst diff)
+  (and lst (cdr lst)
+	   (= diff (- (cadr lst) (car lst)))
+	   (if (cddr lst)
+		   (diff-pair-cur (cddr lst) diff)
+		   t)))
+
+(defun diff-pair-do (lst diff)
+  (let ((len (length lst)))
+	(and lst (evenp len)
+		 (do ((l lst (cddr l)))
+			 ((or (null l)
+				  (/= diff (- (cadr l) (car l))))
+			  (null l))))))
+
+(defun diff-pair-mapc (lst diff)
+  (block nil
+	(and lst
+		 (let ((fir nil))
+		   (mapc #'(lambda (x)
+					 (if (null fir)
+						 (setf fir x)
+						 (if (/= diff (- x fir))
+							 (return nil)
+						   (setf fir nil)))) lst)
+		   (null fir)))))
+
+;; 8
+
+(defun vector-max-min (vec)
+  (let ((head (svref vec 0)))
+	(if (= 1 (length vec))
+		(values head head)
+		(multiple-value-bind (max min)
+			(vector-max-min (subseq vec 1))
+		  (values (max max head) (min min head))))))
+
+(defun vector-max-min (vec)
+  (vector-max-min-recur vec 0 (- (length vec) 1)))
+
+(defun vector-max-min-recur (vec head tail)
+  (cond ((< (- tail head) 0)
+		 nil)
+		((zerop (- tail head))
+		 (values (svref vec head) (svref vec tail)))
+		(t (multiple-value-bind (max min)
+			   (vector-max-min-recur vec (+ head 1) tail)
+			 (values (max max (svref vec head))
+					 (min min (svref vec head)))))))
