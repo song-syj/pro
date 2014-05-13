@@ -25,3 +25,4 @@
 
 (defun fermat-try (n a)
   (= (expmod a n n) a))
+
