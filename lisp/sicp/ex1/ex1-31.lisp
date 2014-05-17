@@ -40,5 +40,6 @@
 		   (next (x)
 			 (+ x 1)))
 	(product-iter #'term 1 #'next b 1.0d0)))
+;; precision
 
 
