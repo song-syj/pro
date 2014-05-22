@@ -31,5 +31,30 @@
 (defun div-interval (x y)
   (mul-interval x (make-interval (/ 1.0 (upper-bound y))
 								 (/ 1.0 (lower-bound y)))))
+(defun sub-interval (x y)
+  (make-interval (- (lower-bound x) (upper-bound y))
+				 (- (upper-bound x) (lower-bound y))))
 
+(defun make-interval (a b) (cons a b))
+(defun upper-bound (x) (cdr x))
+(defun lower-bound (x) (car x))
 
+(defun width-interval (x)
+  (/ (- (upper-bound x) (lower-bound x)) 2.0))
+
+(defun div-interval (x y)
+  (let ((upy (upper-bound y))
+		(lowy (lower-bound y)))
+	(if (and (>= upy 0) (<= lowy 0))
+		(error "the divided interval spans zero!")
+		(mul-interval x (make-interval (/ 1.0 upy)
+									   (/ 1.0 lowy))))))
+
+(defun make-center-width (c w)
+  (make-interval (- c w) (+ c w)))
+
+(defun center-interval (i)
+  (/ (+ (upper-bound i) (lower-bound i)) 2.0))
+
+(defun width-interval (x)
+  (/ (- (upper-bound x) (lower-bound x)) 2.0))

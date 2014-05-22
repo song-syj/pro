@@ -7,9 +7,8 @@
 (defun div-interval (x y)
   (let ((upy (upper-bound y))
 		(lowy (lower-bound y)))
-	(if ((and (>= upy 0) (<= lowy 0)))
+	(if (and (>= upy 0) (<= lowy 0))
 		(error "the divided interval spans zero!")
-		(mul-interval x (make-interval (/ 1.0 (upper-bound y))
-									   (/ 1.0 (lower-bound y)))))))
-
+		(mul-interval x (make-interval (/ 1.0 upy)
+									   (/ 1.0 lowy))))))
 
