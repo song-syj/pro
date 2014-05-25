@@ -99,6 +99,9 @@
   (accumulate
    #'cons nil (filter #'evenp (mapcar #'fib (enumerate-interval 0 n)))))
 
+(defun square (x)
+  (* x x))
+
 (defun list-fib-squares (n)
   (accumulate #'cons nil
 			  (mapcar #'square
@@ -110,8 +113,35 @@
 			  (mapcar #'square
 					  (filter #'oddp sequence))))
 
-(defun salary-of-highest-paid-programmer (records)
-  (accumulate #'max 0 (mapcar #'salary (filter #'programmer? records))))
+;; (defun salary-of-highest-paid-programmer (records)
+;;   (accumulate #'max 0 (mapcar #'salary (filter #'programmer? records))))
 
+;; Nested Mapping
 
+(defun flatmap (proc seq)
+  (accumulate #'append nil (mapcar proc seq)))
+
+(defun prime-sum? (pair)
+  (prime? (+ (car pair) (cadr pair))))
+
+(defun make-pair-sum (pair)
+  (list (car pair) (cadr pair) (+ (car pair) (cadr pair))))
+
+(defun prime-pair-sum (n)
+  (mapcar #'make-pair-sum
+		  (filter #'prime-sum?
+				  (flatmap #'(lambda (i)
+							   (mapcar #'(lambda (j)
+										   (list j i))
+									   (enumerate-interval 1 (- i 1))))
+						   (enumerate-interval 1 n)))))
+
+(defun permutations (s)
+  (if (null s)
+	  (list nil)
+	  (flatmap #'(lambda (x)
+				   (mapcar #'(lambda (p)
+							   (cons x p))
+						   (permutations (remove x s))))
+	   s)))
 
