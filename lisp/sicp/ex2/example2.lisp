@@ -58,3 +58,60 @@
 
 (defun width-interval (x)
   (/ (- (upper-bound x) (lower-bound x)) 2.0))
+
+;;Sequences as Conventional Interfaces
+
+(defun filter (predicate sequence)
+  (cond ((null sequence) nil)
+		((funcall predicate (car sequence))
+		 (cons (car sequence)
+			   (filter predicate (cdr sequence))))
+		(t (filter predicate (cdr sequence)))))
+
+(defun accumulate (op initial sequence)
+  (if (null sequence)
+	  initial
+	 (funcall op (car sequence)
+				  (accumulate op initial (cdr sequence)))))
+
+(defun enumerate-interval (low high)
+  (if (> low high)
+	  nil
+	  (cons low (enumerate-interval (+ low 1)  high))))
+
+(defun enumerate-tree (tree)
+  (cond ((null tree) nil) 
+		((atom tree) (list tree))
+		(t (append (enumerate-tree (car tree))
+				   (enumerate-tree (cdr tree))))))
+
+(defun sum-odd-squares (tree)
+  (accumulate
+   #'+ 0 (mapcar #'square (filter #'oddp (enumerate-tree tree)))))
+
+(defun fib (n)
+  (if (<= n 1) 
+	  n
+	  (+ (fib (- n 1))
+		 (fib (- n 2)))))
+
+(defun even-fibs (n)
+  (accumulate
+   #'cons nil (filter #'evenp (mapcar #'fib (enumerate-interval 0 n)))))
+
+(defun list-fib-squares (n)
+  (accumulate #'cons nil
+			  (mapcar #'square
+					  (mapcar #'fib
+							  (enumerate-interval 0 n)))))
+
+(defun product-of-square-of-odd-elements (sequence)
+  (accumulate #'* 1
+			  (mapcar #'square
+					  (filter #'oddp sequence))))
+
+(defun salary-of-highest-paid-programmer (records)
+  (accumulate #'max 0 (mapcar #'salary (filter #'programmer? records))))
+
+
+

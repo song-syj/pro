@@ -6,5 +6,8 @@
 
 (defun reverse-list (lst)
   (labels ((reverse-iter (lst acc)
-			 )))
-  (reverse-iter lst nil)
+			 (if (null lst)
+				 acc
+				 (reverse-iter (cdr lst) (cons (car lst) acc)))))
+	(reverse-iter lst nil)))
+

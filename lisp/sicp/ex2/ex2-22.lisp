@@ -28,5 +28,5 @@
 			 (if (null things)
 				 answer
 				 (iter (cdr things)
-					   (append answer (list (square (car things))))))))
-	(iter (cdr items) (list (car items)))))
+					   (cons (square (car things)) answer)))))
+	(reverse (iter items nil))))

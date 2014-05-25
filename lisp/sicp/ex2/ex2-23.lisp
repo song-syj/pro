@@ -17,3 +17,8 @@
 ;; above) can be something arbitrary, such as true. Give an
 ;; implementation of for-each .
 
+(defun for-each (proc items)
+  (if (null items)
+	  t
+	  (progn (funcall proc (car items))
+			  (for-each proc (cdr items)))))
