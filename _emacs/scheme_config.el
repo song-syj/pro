@@ -2,12 +2,15 @@
 ;; Scheme 
 ;;;;;;;;;;;;
 
+(setq geiser-active-implementations '(racket))
+
+
 (autoload 'paredit-mode "paredit"
   "Minor mode for pseudo-structurally editing Lisp code."
   t)
 
 (require 'cmuscheme)
-(setq scheme-program-name "racket")      
+(setq scheme-program-name "mit-scheme")      
 
 ;; Scheme config
 ;; Enable Quack mode
