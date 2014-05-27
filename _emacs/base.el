@@ -39,6 +39,9 @@
 (add-hook 'c++-mode-hook
           '(lambda ()
              (c-set-style "stroustrup")))
+;;set default directory path
+(setq default-directory "~/pro/")
+
 ;;set GUI
 (set-scroll-bar-mode nil)
 
@@ -50,3 +53,8 @@
 (global-set-key (kbd "C-c p") 'windmove-up)
 (global-set-key (kbd "C-c f") 'windmove-right)
 (global-set-key (kbd "C-c b") 'windmove-left)
+
+;;
+
+(require 'smartparens-config)
+(smartparens-global-mode t)
