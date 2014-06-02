@@ -1,0 +1,203 @@
+; SLIME 2014-01-23; compiling file "/home/song/pro/lisp/sicp/ex2/ex2-56.lisp" (written 02 JUN 2014 03:13:58 AM):
+
+; /home/song/pro/lisp/sicp/ex2/ex2-56.fasl written
+; compilation finished in 0:00:00.025
+; compiling file "/home/song/pro/lisp/sicp/ex2/ex2-56.lisp" (written 02 JUN 2014 03:24:47 AM):
+
+; /home/song/pro/lisp/sicp/ex2/ex2-56.fasl written
+; compilation finished in 0:00:00.008
+; compiling file "/home/song/pro/lisp/sicp/ex2/example2-3-2.lisp" (written 02 JUN 2014 03:25:44 AM):
+
+; file: /home/song/pro/lisp/sicp/ex2/example2-3-2.lisp
+; in: DEFUN DERIV
+;     (DERIV U)
+; 
+; caught WARNING:
+;   The function was called with one argument, but wants exactly two.
+
+; in: DEFUN MAKE-SUM
+;     (DEFUN MAKE-SUM (A1 A2)
+;       (COND ((=NUMBER? A1 0) A2) ((=NUMBER? A2 0) A1)
+;             ((AND (NUMBER? A1) (NUMBER? A2)) (+ A1 A2)) (T (LIST A1 A2))))
+; --> PROGN 
+; ==>
+;   (EVAL-WHEN (:COMPILE-TOPLEVEL) (SB-C:%COMPILER-DEFUN 'MAKE-SUM 'NIL T))
+; 
+; caught WARNING:
+;   Duplicate definition for MAKE-SUM found in one file.
+;   See also:
+;     The ANSI Standard, Section 3.2.2.3
+
+; in: DEFUN MAKE-PRODUCT
+;     (DEFUN MAKE-PRODUCT (A1 A2)
+;       (COND ((OR (=NUMBER? A1 0) (=NUMBER? A2 0)) 0) ((=NUMBER? A1 1) A2)
+;             ((=NUMBER? A2 1) A1) ((AND (NUMBER? A1) (NUMBER? A2)) (* A1 A2))
+;             (T (LIST A1 A2))))
+; --> PROGN 
+; ==>
+;   (EVAL-WHEN (:COMPILE-TOPLEVEL) (SB-C:%COMPILER-DEFUN 'MAKE-PRODUCT 'NIL T))
+; 
+; caught WARNING:
+;   Duplicate definition for MAKE-PRODUCT found in one file.
+;   See also:
+;     The ANSI Standard, Section 3.2.2.3
+
+;     (NUMBER? A1)
+; 
+; caught STYLE-WARNING:
+;   undefined function: NUMBER?
+
+; in: DEFUN MAKE-SUM
+;     (NUMBER? A1)
+; 
+; caught STYLE-WARNING:
+;   undefined function: NUMBER?
+
+; in: DEFUN DERIV
+;     (NUMBER? EXP)
+; 
+; caught STYLE-WARNING:
+;   undefined function: NUMBER?
+
+; 
+; caught STYLE-WARNING:
+;   1 more use of undefined function NUMBER?
+; 
+; compilation unit finished
+;   Undefined function:
+;     NUMBER?
+;   caught 3 WARNING conditions
+;   caught 4 STYLE-WARNING conditions
+
+; /home/song/pro/lisp/sicp/ex2/example2-3-2.fasl written
+; compilation finished in 0:00:00.072
+; compiling (SETF (SYMBOL-FUNCTION #) ...)
+; compiling file "/home/song/pro/lisp/sicp/ex2/example2-3-2.lisp" (written 02 JUN 2014 03:25:44 AM):
+
+; file: /home/song/pro/lisp/sicp/ex2/example2-3-2.lisp
+; in: DEFUN DERIV
+;     (DERIV U)
+; 
+; caught WARNING:
+;   The function was called with one argument, but wants exactly two.
+
+; in: DEFUN MAKE-SUM
+;     (DEFUN MAKE-SUM (A1 A2)
+;       (COND ((=NUMBER? A1 0) A2) ((=NUMBER? A2 0) A1)
+;             ((AND (NUMBER? A1) (NUMBER? A2)) (+ A1 A2)) (T (LIST A1 A2))))
+; --> PROGN 
+; ==>
+;   (EVAL-WHEN (:COMPILE-TOPLEVEL) (SB-C:%COMPILER-DEFUN 'MAKE-SUM 'NIL T))
+; 
+; caught WARNING:
+;   Duplicate definition for MAKE-SUM found in one file.
+;   See also:
+;     The ANSI Standard, Section 3.2.2.3
+
+; in: DEFUN MAKE-PRODUCT
+;     (DEFUN MAKE-PRODUCT (A1 A2)
+;       (COND ((OR (=NUMBER? A1 0) (=NUMBER? A2 0)) 0) ((=NUMBER? A1 1) A2)
+;             ((=NUMBER? A2 1) A1) ((AND (NUMBER? A1) (NUMBER? A2)) (* A1 A2))
+;             (T (LIST A1 A2))))
+; --> PROGN 
+; ==>
+;   (EVAL-WHEN (:COMPILE-TOPLEVEL) (SB-C:%COMPILER-DEFUN 'MAKE-PRODUCT 'NIL T))
+; 
+; caught WARNING:
+;   Duplicate definition for MAKE-PRODUCT found in one file.
+;   See also:
+;     The ANSI Standard, Section 3.2.2.3
+; 
+; compilation unit finished
+;   caught 3 WARNING conditions
+
+; /home/song/pro/lisp/sicp/ex2/example2-3-2.fasl written
+; compilation finished in 0:00:00.035
+; compiling file "/home/song/pro/lisp/sicp/ex2/example2-3-2.lisp" (written 02 JUN 2014 03:26:17 AM):
+
+; file: /home/song/pro/lisp/sicp/ex2/example2-3-2.lisp
+; in: DEFUN MAKE-SUM
+;     (DEFUN MAKE-SUM (A1 A2)
+;       (COND ((=NUMBER? A1 0) A2) ((=NUMBER? A2 0) A1)
+;             ((AND (NUMBER? A1) (NUMBER? A2)) (+ A1 A2)) (T (LIST A1 A2))))
+; --> PROGN 
+; ==>
+;   (EVAL-WHEN (:COMPILE-TOPLEVEL) (SB-C:%COMPILER-DEFUN 'MAKE-SUM 'NIL T))
+; 
+; caught WARNING:
+;   Duplicate definition for MAKE-SUM found in one file.
+;   See also:
+;     The ANSI Standard, Section 3.2.2.3
+
+; in: DEFUN MAKE-PRODUCT
+;     (DEFUN MAKE-PRODUCT (A1 A2)
+;       (COND ((OR (=NUMBER? A1 0) (=NUMBER? A2 0)) 0) ((=NUMBER? A1 1) A2)
+;             ((=NUMBER? A2 1) A1) ((AND (NUMBER? A1) (NUMBER? A2)) (* A1 A2))
+;             (T (LIST A1 A2))))
+; --> PROGN 
+; ==>
+;   (EVAL-WHEN (:COMPILE-TOPLEVEL) (SB-C:%COMPILER-DEFUN 'MAKE-PRODUCT 'NIL T))
+; 
+; caught WARNING:
+;   Duplicate definition for MAKE-PRODUCT found in one file.
+;   See also:
+;     The ANSI Standard, Section 3.2.2.3
+; 
+; compilation unit finished
+;   caught 2 WARNING conditions
+
+; /home/song/pro/lisp/sicp/ex2/example2-3-2.fasl written
+; compilation finished in 0:00:00.032
+; compiling file "/home/song/pro/lisp/sicp/ex2/example2-3-2.lisp" (written 02 JUN 2014 03:26:43 AM):
+
+; /home/song/pro/lisp/sicp/ex2/example2-3-2.fasl written
+; compilation finished in 0:00:00.053
+; compiling file "/home/song/pro/lisp/sicp/ex2/example2-3-2.lisp" (written 02 JUN 2014 03:27:26 AM):
+
+; /home/song/pro/lisp/sicp/ex2/example2-3-2.fasl written
+; compilation finished in 0:00:00.031
+STYLE-WARNING: redefining COMMON-LISP-USER::EXPONENTIATION? in DEFUN
+STYLE-WARNING: redefining COMMON-LISP-USER::EXPONENT in DEFUN
+STYLE-WARNING: redefining COMMON-LISP-USER::BASE in DEFUN
+STYLE-WARNING: redefining COMMON-LISP-USER::MAKE-EXPONENTIATION in DEFUN
+
+CL-USER> e
+; Evaluation aborted on #<UNBOUND-VARIABLE E {10030723A3}>.
+CL-USER> (EXP)
+; Evaluation aborted on #<SB-INT:SIMPLE-PROGRAM-ERROR "invalid number of arguments: ~S" {10031C2FC3}>.
+CL-USER> (exp 1)
+2.7182817
+CL-USER> (deriv '(** 10 10))
+; Evaluation aborted on #<SB-INT:SIMPLE-PROGRAM-ERROR "invalid number of arguments: ~S" {10033559C3}>.
+CL-USER> (deriv '(** u 8) u)
+; Evaluation aborted on #<UNBOUND-VARIABLE U {10034C7EE3}>.
+CL-USER> (deriv '(** u 8) u)
+; Evaluation aborted on #<UNBOUND-VARIABLE U {1003610C43}>.
+CL-USER> (deriv '(** u 8) 'u)
+(7 (U 7))
+CL-USER> (list * 1 2)
+((7 (U 7)) 1 2)
+CL-USER> (list '* 1 2)
+; compiling file "/home/song/pro/lisp/sicp/ex2/example2-3-2.lisp" (written 02 JUN 2014 03:30:40 AM):
+
+; /home/song/pro/lisp/sicp/ex2/example2-3-2.fasl written
+; compilation finished in 0:00:00.038
+(* 1 2)
+CL-USER> (deriv '(** u 8) 'u)
+; compiling (DEFUN MAKE-EXPONENTIATION ...)(* 7 (U 7))
+CL-USER> (deriv '(** u 8) 'u)
+
+(* 7 (** U 7))
+CL-USER> (deriv '(** u 1) 'u)
+; compiling file "/home/song/pro/lisp/sicp/ex2/example2-3-2.lisp" (written 02 JUN 2014 03:32:05 AM):
+
+; /home/song/pro/lisp/sicp/ex2/example2-3-2.fasl written
+; compilation finished in 0:00:00.031
+0
+CL-USER> (deriv '(** u 1) 'u)
+1
+CL-USER> (deriv '(** u 0) 'u)
+0
+CL-USER> (deriv '(** u 2) 'u)
+(* 2 U)
+CL-USER> (deriv '(* 1/2 (** u 2)) 'u)
