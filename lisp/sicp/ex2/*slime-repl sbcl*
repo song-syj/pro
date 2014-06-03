@@ -201,3 +201,485 @@ CL-USER> (deriv '(** u 0) 'u)
 CL-USER> (deriv '(** u 2) 'u)
 (* 2 U)
 CL-USER> (deriv '(* 1/2 (** u 2)) 'u)
+; compiling file "/home/song/pro/lisp/sicp/ex2/example2-3-2.lisp" (written 02 JUN 2014 03:36:16 AM):
+
+; /home/song/pro/lisp/sicp/ex2/example2-3-2.fasl written
+; compilation finished in 0:00:00.034
+(* (* 2 U) 1/2)
+CL-USER> (deriv '(* 1/2 (** u 2)) 'u)
+(* 1/2 (* 2 U))
+CL-USER> (deriv '(* (+ u v) (** u 2)) 'u)
+((DERIV '(* 1/2 (** U 2)) 'U) (* (+ U V) (* 2 U)) (** U 2))
+CL-USER> (deriv '(* (+ u v) (** u 2)) 'u)
+; compiling file "/home/song/pro/lisp/sicp/ex2/example2-3-2.lisp" (written 02 JUN 2014 03:36:16 AM):
+
+; /home/song/pro/lisp/sicp/ex2/example2-3-2.fasl written
+; compilation finished in 0:00:00.031
+
+CL-USER> (deriv '(* (+ u v) (** u 2)) 'u)
+((DERIV '(* (+ U V) (** U 2)) 'U) (* (+ U V) (* 2 U)) (** U 2))
+CL-USER> (deriv '(* (+ u v) (** u 2)) 'u)
+((DERIV '(* (+ U V) (** U 2)) 'U) (* (+ U V) (* 2 U)) (** U 2))
+CL-USER> (trace MAKE-SUM)
+(MAKE-SUM)
+CL-USER> (trace MAKE-PRODUCT)
+(MAKE-PRODUCT)
+CL-USER> (trace MAKE-EXPONENTIATION)
+(MAKE-EXPONENTIATION)
+CL-USER> (deriv '(* (+ u v) (** u 2)) 'u)
+  0: (MAKE-EXPONENTIATION U 1)
+  0: MAKE-EXPONENTIATION returned U
+  0: (MAKE-PRODUCT U 1)
+  0: MAKE-PRODUCT returned U
+  0: (MAKE-PRODUCT 2 U)
+  0: MAKE-PRODUCT returned (* 2 U)
+  0: (MAKE-PRODUCT (+ U V) (* 2 U))
+  0: MAKE-PRODUCT returned (* (+ U V) (* 2 U))
+  0: (MAKE-SUM 1 0)
+  0: MAKE-SUM returned 1
+  0: (MAKE-PRODUCT 1 (** U 2))
+  0: MAKE-PRODUCT returned (** U 2)
+  0: (MAKE-SUM (* (+ U V) (* 2 U)) (** U 2))
+  0: MAKE-SUM returned
+       ((TRACE MAKE-EXPONENTIATION) (* (+ U V) (* 2 U)) (** U 2))
+; compiling file "/home/song/pro/lisp/sicp/ex2/example2-3-2.lisp" (written 02 JUN 2014 03:43:27 AM):
+
+; /home/song/pro/lisp/sicp/ex2/example2-3-2.fasl written
+; compilation finished in 0:00:00.035
+((TRACE MAKE-EXPONENTIATION) (* (+ U V) (* 2 U)) (** U 2))
+CL-USER> (deriv '(* (+ u v) (** u 2)) 'u)
+  0: (MAKE-EXPONENTIATION U 1)
+  0: MAKE-EXPONENTIATION returned U
+  0: (MAKE-PRODUCT U 1)
+  0: MAKE-PRODUCT returned U
+  0: (MAKE-PRODUCT 2 U)
+  0: MAKE-PRODUCT returned (* 2 U)
+  0: (MAKE-PRODUCT (+ U V) (* 2 U))
+  0: MAKE-PRODUCT returned (* (+ U V) (* 2 U))
+  0: (MAKE-SUM 1 0)
+  0: MAKE-SUM returned 1
+  0: (MAKE-PRODUCT 1 (** U 2))
+  0: MAKE-PRODUCT returned (** U 2)
+  0: (MAKE-SUM (* (+ U V) (* 2 U)) (** U 2))
+  0: MAKE-SUM returned (+ (* (+ U V) (* 2 U)) (** U 2))
+(+ (* (+ U V) (* 2 U)) (** U 2))
+CL-USER> (untrace allocate-instance)
+WARNING: Function is not TRACEd: ALLOCATE-INSTANCE
+T
+CL-USER> (untrace)
+T
+CL-USER> (untrace allocate-instance)
+WARNING: Function is not TRACEd: ALLOCATE-INSTANCE
+T
+CL-USER> (deriv '(* (+ u v) (** u 2)) 'u)
+STYLE-WARNING: redefining COMMON-LISP-USER::MULTIPLICAND in DEFUN
+(+ (* (+ U V) (* 2 U)) (** U 2))
+CL-USER> (deriv '(* (+ u v) (** u 2)) 'u)
+STYLE-WARNING: redefining COMMON-LISP-USER::MULTIPLICAND in DEFUN
+(+ (* (+ U V) (* (* 2 U) NIL)) (* (** U 2)))
+CL-USER> (deriv '(* (+ u v) (** u 2)) 'u)
+(+ (* (+ U V) (* 2 U)) (** U 2))
+CL-USER> (trace augend)
+(AUGEND)
+CL-USER> (trace multiplicadn)
+WARNING: COMMON-LISP-USER::MULTIPLICADN is undefined, not tracing.
+NIL
+CL-USER> (trace multiplicand)
+(MULTIPLICAND)
+CL-USER> (deriv '(* (+ u v) (** u 2)) 'u)
+  0: (MULTIPLICAND (* (+ U V) (** U 2)))
+  0: MULTIPLICAND returned (** U 2)
+  0: (AUGEND (+ U V))
+  0: AUGEND returned V
+  0: (MULTIPLICAND (* (+ U V) (** U 2)))
+  0: MULTIPLICAND returned (** U 2)
+; compiling (DEFUN MULTIPLICAND ...)
+STYLE-WARNING: redefining COMMON-LISP-USER::MULTIPLICAND in DEFUN
+; compiling file "/home/song/pro/lisp/sicp/ex2/e2-57.lisp" (written 02 JUN 2014 04:44:25 AM):
+
+; /home/song/pro/lisp/sicp/ex2/e2-57.fasl written
+; compilation finished in 0:00:00.003
+STYLE-WARNING: redefining COMMON-LISP-USER::AUGEND in DEFUN
+(+ (* (+ U V) (* 2 U)) (** U 2))
+CL-USER> (deriv '(* (+ u v) (** u 2)) 'u)
+  0: (MULTIPLICAND (* (+ U V) (** U 2)))
+  0: MULTIPLICAND returned (* (** U 2))
+  0: (MULTIPLICAND (* (** U 2)))
+  0: MULTIPLICAND returned NIL
+  0: (MULTIPLICAND (* (** U 2)))
+  0: MULTIPLICAND returned NIL
+  0: (AUGEND (+ U V))
+  0: AUGEND returned (+ V)
+  0: (AUGEND (+ V))
+  0: AUGEND returned NIL
+  0: (MULTIPLICAND (* (+ U V) (** U 2)))
+  0: MULTIPLICAND returned (* (** U 2))
+; compiling (DEFUN MULTIPLICAND ...)(+ (* (+ U V) (* (* 2 U) NIL)) (* (** U 2)))
+CL-USER> (deriv '(* (+ u v) (** u 2)) 'u)
+  0: (MULTIPLICAND (* (+ U V) (** U 2)))
+  0: MULTIPLICAND returned (** U 2)
+  0: (AUGEND (+ U V))
+  0: AUGEND returned (+ V)
+  0: (AUGEND (+ V))
+  0: AUGEND returned NIL
+  0: (MULTIPLICAND (* (+ U V) (** U 2)))
+  0: MULTIPLICAND returned (** U 2)
+(+ (* (+ U V) (* 2 U)) (** U 2))
+CL-USER> (derive '(* x y (+ x 3)) 'x)
+; in: DERIVE '(* X Y (+ X 3))
+;     (DERIVE '(* X Y (+ X 3)) 'X)
+; 
+; caught STYLE-WARNING:
+;   undefined function: DERIVE
+; 
+; compilation unit finished
+;   Undefined function:
+;     DERIVE
+;   caught 1 STYLE-WARNING condition
+; Evaluation aborted on #<UNDEFINED-FUNCTION DERIVE {1004C4AEB3}>.
+CL-USER> (deriv '(* x y (+ x 3)) 'x)
+  0: (MULTIPLICAND (* X Y (+ X 3)))
+  0: MULTIPLICAND returned (* Y (+ X 3))
+  0: (MULTIPLICAND (* Y (+ X 3)))
+  0: MULTIPLICAND returned (+ X 3)
+  0: (AUGEND (+ X 3))
+  0: AUGEND returned (+ 3)
+  0: (AUGEND (+ 3))
+  0: AUGEND returned NIL
+  0: (MULTIPLICAND (* Y (+ X 3)))
+  0: MULTIPLICAND returned (+ X 3)
+  0: (MULTIPLICAND (* X Y (+ X 3)))
+  0: MULTIPLICAND returned (* Y (+ X 3))
+
+; compiling file "/home/song/pro/lisp/sicp/ex2/e2-57.lisp" (written 02 JUN 2014 04:46:39 AM):
+
+; /home/song/pro/lisp/sicp/ex2/e2-57.fasl written
+; compilation finished in 0:00:00.003
+(+ (* X Y) (* Y (+ X 3)))
+CL-USER> (deriv '(* x y (+ x 3)) 'x)
+  0: (MULTIPLICAND (* X Y (+ X 3)))
+  0: MULTIPLICAND returned (* Y (+ X 3))
+  0: (MULTIPLICAND (* Y (+ X 3)))
+  0: MULTIPLICAND returned (+ X 3)
+  0: (AUGEND (+ X 3))
+  0: AUGEND returned 3
+  0: (MULTIPLICAND (* Y (+ X 3)))
+  0: MULTIPLICAND returned (+ X 3)
+  0: (MULTIPLICAND (* X Y (+ X 3)))
+  0: MULTIPLICAND returned (* Y (+ X 3))
+STYLE-WARNING: redefining COMMON-LISP-USER::MAKE-SUM in DEFUN
+(+ (* X Y) (* Y (+ X 3)))
+CL-USER> (deriv '(* x y (+ x 3)) 'x)
+  0: (MULTIPLICAND (* X Y (+ X 3)))
+  0: MULTIPLICAND returned (* Y (+ X 3))
+  0: (MULTIPLICAND (* Y (+ X 3)))
+  0: MULTIPLICAND returned (+ X 3)
+  0: (AUGEND (+ X 3))
+  0: AUGEND returned 3
+  0: (MULTIPLICAND (* Y (+ X 3)))
+  0: MULTIPLICAND returned (+ X 3)
+  0: (MULTIPLICAND (* X Y (+ X 3)))
+  0: MULTIPLICAND returned (* Y (+ X 3))
+(+ (* X (+ (* Y (+ 1 0)) 0)) (* Y (+ X 3)))
+CL-USER> (untrace)
+T
+CL-USER> (trace nake-sum)
+WARNING: COMMON-LISP-USER::NAKE-SUM is undefined, not tracing.
+NIL
+CL-USER> (trace make-sum)
+(MAKE-SUM)
+CL-USER> (deriv '(* x y (+ x 3)) 'x)
+  0: (MAKE-SUM 1 0)
+  0: MAKE-SUM returned (+ 1 0)
+  0: (MAKE-SUM (* Y (+ 1 0)) 0)
+  0: MAKE-SUM returned (+ (* Y (+ 1 0)) 0)
+  0: (MAKE-SUM (* X (+ (* Y (+ 1 0)) 0)) (* Y (+ X 3)))
+  0: MAKE-SUM returned (+ (* X (+ (* Y (+ 1 0)) 0)) (* Y (+ X 3)))
+(+ (* X (+ (* Y (+ 1 0)) 0)) (* Y (+ X 3)))
+CL-USER> (reduce #'+ '(1 2 3))
+; compiling (DEFUN MAKE-SUM ...)
+
+; file: /tmp/fileZwYbz7
+; in: DEFUN MAKE-SUM
+;     (LET ((ALL (REDUCE #'+ (REMOVE-IF-NOT #'NUMBERP NUMS)))
+;           (REMAIN (REMOVE-IF #'NUMBERP NUMS)))
+;       )
+; 
+; caught STYLE-WARNING:
+;   The variable ALL is defined but never used.
+; 
+; caught STYLE-WARNING:
+;   The variable REMAIN is defined but never used.
+;     (LIST ALL)
+; ==>
+;   (CONS ALL NIL)
+; 
+; caught WARNING:
+;   undefined variable: ALL
+
+;     (APPEND (LIST '+) (LIST ALL) REMAIN)
+; 
+; caught WARNING:
+;   undefined variable: REMAIN
+; 
+; compilation unit finished
+;   Undefined variables:
+;     ALL REMAIN
+;   caught 2 WARNING conditions
+;   caught 2 STYLE-WARNING conditions
+STYLE-WARNING: redefining COMMON-LISP-USER::MAKE-SUM in DEFUN
+; compiling (DEFUN MAKE-SUM ...)
+; compiling (DEFUN MAKE-SUM ...)6
+CL-USER> (make-sum '(1 2 3))
+  0: (MAKE-SUM (1 2 3))
+  0: MAKE-SUM returned (+ 0 (1 2 3))
+(+ 0 (1 2 3))
+CL-USER> (make-sum 1 2 3)
+  0: (MAKE-SUM 1 2 3)
+  0: MAKE-SUM returned (+ 6)
+; compiling (DEFUN MAKE-SUM ...)(+ 6)
+CL-USER> (make-sum 1 2 3)
+  0: (MAKE-SUM 1 2 3)
+  0: MAKE-SUM returned 6
+6
+CL-USER> (make-sum '(1 2 3))
+  0: (MAKE-SUM (1 2 3))
+  0: MAKE-SUM returned (+ 0 (1 2 3))
+(+ 0 (1 2 3))
+CL-USER> (make-sum 'v 'u 8 9 0)
+  0: (MAKE-SUM V U 8 9 0)
+  0: MAKE-SUM returned (+ 17 V U)
+(+ 17 V U)
+CL-USER> (history)
+
+; in: HISTORY
+;     (HISTORY)
+; 
+; caught STYLE-WARNING:
+;   undefined function: HISTORY
+; 
+; compilation unit finished
+;   Undefined function:
+;     HISTORY
+;   caught 1 STYLE-WARNING condition
+; Evaluation aborted on #<UNDEFINED-FUNCTION HISTORY {1002F81F23}>.
+CL-USER> (deriv '(* (+ u v) (** u 2)) 'u)
+  0: (MAKE-SUM 1 0)
+  0: MAKE-SUM returned 1
+  0: (MAKE-SUM (* (+ U V) (* 2 U)) (** U 2))
+  0: MAKE-SUM returned (+ 0 (* (+ U V) (* 2 U)) (** U 2))
+; compiling (DEFUN MAKE-SUM ...)(+ 0 (* (+ U V) (* 2 U)) (** U 2))
+CL-USER> (deriv '(* (+ u v) (** u 2)) 'u)
+  0: (MAKE-SUM 1 0)
+  0: MAKE-SUM returned 1
+  0: (MAKE-SUM (* (+ U V) (* 2 U)) (** U 2))
+  0: MAKE-SUM returned (+ (* (+ U V) (* 2 U)) (** U 2))
+(+ (* (+ U V) (* 2 U)) (** U 2))
+CL-USER> (deriv '(* (+ u v) (** u 2)) 'u)
+  0: (MAKE-SUM 1 0)
+  0: MAKE-SUM returned 1
+  0: (MAKE-SUM (* (+ U V) (* 2 U)) (** U 2))
+  0: MAKE-SUM returned (+ (* (+ U V) (* 2 U)) (** U 2))
+(+ (* (+ U V) (* 2 U)) (** U 2))
+CL-USER> (derive '(* x y x) 'x)
+; Evaluation aborted on #<UNDEFINED-FUNCTION DERIVE {1003979E13}>.
+CL-USER> (deriv '(* x y x) 'x)
+  0: (MAKE-SUM Y 0)
+  0: MAKE-SUM returned (+ Y)
+  0: (MAKE-SUM (* X (+ Y)) (* Y X))
+  0: MAKE-SUM returned (+ (* X (+ Y)) (* Y X))
+; compiling (DEFUN MAKE-SUM ...)(+ (* X (+ Y)) (* Y X))
+CL-USER> (deriv '(* x y x) 'x)
+  0: (MAKE-SUM Y 0)
+  0: MAKE-SUM returned Y
+  0: (MAKE-SUM (* X Y) (* Y X))
+  0: MAKE-SUM returned (+ (* X Y) (* Y X))
+; compiling (DEFUN MAKE-PRODUCT ...)
+STYLE-WARNING: redefining COMMON-LISP-USER::MAKE-PRODUCT in DEFUN
+(+ (* X Y) (* Y X))
+CL-USER> (deriv '(+ x y x) 'x)
+  0: (MAKE-SUM 0 1)
+  0: MAKE-SUM returned 1
+  0: (MAKE-SUM 1 1)
+  0: MAKE-SUM returned 2
+; compiling (DEFUN AUGEND-INFIX ...)
+; compiling (DEFUN NUMBER? ...)
+; compiling (DEFUN VARIBLE? ...)
+; compiling (DEFUN SAME-VARIBLE? ...)
+; compiling (DEFUN DERIV-INFIX ...)
+; compiling (DEFUN SUM-INFIX? ...)
+
+; file: /tmp/fileXLId8u
+; in: DEFUN SUM-INFIX?
+;     ((AND (CONSP EXP) (EQL (CADR EXP) '+)))
+; 
+; caught ERROR:
+;   illegal function call
+
+;     (DEFUN SUM-INFIX? (EXP) ((AND (CONSP EXP) (EQL (CADR EXP) '+))))
+; --> PROGN EVAL-WHEN 
+; ==>
+;   (SB-IMPL::%DEFUN 'SUM-INFIX?
+;                    (SB-INT:NAMED-LAMBDA SUM-INFIX?
+;                        (EXP)
+;                      (BLOCK SUM-INFIX? ((AND # #))))
+;                    NIL 'NIL (SB-C:SOURCE-LOCATION))
+; 
+; caught STYLE-WARNING:
+;   The variable EXP is defined but never used.
+
+; compiling (DEFUN PRODUCT-INFIX? ...)
+
+; file: /tmp/fileXLId8u
+; in: DEFUN PRODUCT-INFIX?
+;     ((AND (CONSP EXP) (EQL (CADR EXP) '*)))
+; 
+; caught ERROR:
+;   illegal function call
+
+;     (DEFUN PRODUCT-INFIX? (EXP) ((AND (CONSP EXP) (EQL (CADR EXP) '*))))
+; --> PROGN EVAL-WHEN 
+; ==>
+;   (SB-IMPL::%DEFUN 'PRODUCT-INFIX?
+;                    (SB-INT:NAMED-LAMBDA PRODUCT-INFIX?
+;                        (EXP)
+;                      (BLOCK PRODUCT-INFIX? ((AND # #))))
+;                    NIL 'NIL (SB-C:SOURCE-LOCATION))
+; 
+; caught STYLE-WARNING:
+;   The variable EXP is defined but never used.
+
+; compiling (DEFUN MAKE-SUM-INFIX ...)
+; compiling (DEFUN MAKE-PRODUCT-INFIX ...)
+; compiling (DEFUN ADDEND-INFIX ...)
+; compiling (DEFUN AUGEND-INFIX ...); 
+                                    ; compilation unit finished
+                                    ;   caught 2 ERROR conditions
+                                    ;   caught 2 STYLE-WARNING conditions
+STYLE-WARNING: redefining COMMON-LISP-USER::NUMBER? in DEFUN
+STYLE-WARNING: redefining COMMON-LISP-USER::VARIBLE? in DEFUN
+STYLE-WARNING: redefining COMMON-LISP-USER::SAME-VARIBLE? in DEFUN
+
+; compiling file "/home/song/pro/lisp/sicp/ex2/ex2-58.lisp" (written 02 JUN 2014 09:36:36 AM):
+
+; /home/song/pro/lisp/sicp/ex2/ex2-58.fasl written
+; compilation finished in 0:00:00.027
+; compiling (DEFUN DERIV-INFIX ...)
+
+; file: /tmp/fileYa6fR9
+; in: DEFUN DERIV-INFIX
+;     (DERIV-INFIX (ADDEND-INFIX EXP))
+; 
+; caught WARNING:
+;   The function was called with one argument, but wants exactly two.
+
+;     (DERIV-INFIX (AUGEND-INFIX EXP))
+; 
+; caught WARNING:
+;   The function was called with one argument, but wants exactly two.
+
+;     (DERIV-INFIX (MULTIPLICAND-INFIX EXP))
+; 
+; caught WARNING:
+;   The function was called with one argument, but wants exactly two.
+
+;     (DERIV-INFIX (MULTIPLIER-INFIX EXP))
+; 
+; caught WARNING:
+;   The function was called with one argument, but wants exactly two.
+;     (MULTIPLICAND-INFIX EXP)
+; 
+; caught STYLE-WARNING:
+;   undefined function: MULTIPLICAND-INFIX
+
+;     (MULTIPLIER-INFIX EXP)
+; 
+; caught STYLE-WARNING:
+;   undefined function: MULTIPLIER-INFIX
+; 
+; compilation unit finished
+;   Undefined functions:
+;     MULTIPLICAND-INFIX MULTIPLIER-INFIX
+;   caught 4 WARNING conditions
+;   caught 2 STYLE-WARNING conditions
+
+; compiling file "/home/song/pro/lisp/sicp/ex2/ex2-58.lisp" (written 02 JUN 2014 09:42:26 AM):
+
+; file: /home/song/pro/lisp/sicp/ex2/ex2-58.lisp
+; in: DEFUN DERIV-INFIX
+;     (DERIV-INFIX (ADDEND-INFIX EXP))
+; 
+; caught WARNING:
+;   The function was called with one argument, but wants exactly two.
+
+;     (DERIV-INFIX (AUGEND-INFIX EXP))
+; 
+; caught WARNING:
+;   The function was called with one argument, but wants exactly two.
+
+;     (DERIV-INFIX (MULTIPLICAND-INFIX EXP))
+; 
+; caught WARNING:
+;   The function was called with one argument, but wants exactly two.
+
+;     (DERIV-INFIX (MULTIPLIER-INFIX EXP))
+; 
+; caught WARNING:
+;   The function was called with one argument, but wants exactly two.
+; 
+; compilation unit finished
+;   caught 4 WARNING conditions
+
+; /home/song/pro/lisp/sicp/ex2/ex2-58.fasl written
+; compilation finished in 0:00:00.037
+; compiling (DEFUN DERIV-INFIX ...)
+; compiling (DEFUN MAKE-SUM-INFIX ...)
+; compiling (DEFUN MAKE-SUM-INFIX ...)
+; compiling (DEFUN MAKE-PRODUCT-INFIX ...)
+
+; file: /tmp/fileueswkn
+; in: DEFUN MAKE-PRODUCT-INFIX
+;     (=NUMBER? MULTIPLICAND)
+; 
+; caught STYLE-WARNING:
+;   The function was called with one argument, but wants exactly two.
+; 
+; compilation unit finished
+;   caught 1 STYLE-WARNING condition
+; compiling (DEFUN =NUMBER? ...)
+STYLE-WARNING: redefining COMMON-LISP-USER::=NUMBER? in DEFUN
+; compiling (DEFUN DERIV-INFIX ...)
+; compiling (DEFUN DERIV-INFIX ...)2
+CL-USER> (deriv-infix '(x + (3 * (x + (y + 2)))) x)
+; Evaluation aborted on #<UNBOUND-VARIABLE X {100577BE23}>.
+CL-USER> (deriv-infix '(x + (3 * (x + (y + 2)))) 'x)
+; Evaluation aborted on #<UNDEFINED-FUNCTION MULTIPLIER-INFIX {10058FBB73}>.
+CL-USER> (deriv-infix '(x + (3 * (x + (y + 2)))) 'x)
+
+; compiling (DEFUN MULTIPLIER-INFIX ...)
+; compiling (DEFUN MULTIPLIER-INFIX ...)
+; compiling (DEFUN MULTIPLIER-INFIX ...); Evaluation aborted on #<UNDEFINED-FUNCTION MULTIPLIER-INFIX {1005A55923}>.
+CL-USER> (deriv-infix '(x + (3 * (x + (y + 2)))) 'x)
+
+; compiling file "/home/song/pro/lisp/sicp/ex2/ex2-58.lisp" (written 02 JUN 2014 09:53:25 AM):
+
+; file: /home/song/pro/lisp/sicp/ex2/ex2-58.lisp
+; in: DEFUN MAKE-PRODUCT-INFIX
+;     (=NUMBER? MULTIPLICAND)
+; 
+; caught WARNING:
+;   The function was called with one argument, but wants exactly two.
+; 
+; compilation unit finished
+;   caught 1 WARNING condition
+
+; /home/song/pro/lisp/sicp/ex2/ex2-58.fasl written
+; compilation finished in 0:00:00.056
+; compiling file "/home/song/pro/lisp/sicp/ex2/ex2-58.lisp" (written 02 JUN 2014 09:54:50 AM):
+
+; /home/song/pro/lisp/sicp/ex2/ex2-58.fasl written
+; compilation finished in 0:00:00.079
+; Evaluation aborted on #<UNDEFINED-FUNCTION MULTIPLICAND-INFIX {1005BAEE43}>.
+CL-USER> (deriv-infix '(x + (3 * (x + (y + 2)))) 'x)
+4
+CL-USER> 
