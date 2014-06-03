@@ -71,3 +71,50 @@
 (defun multiplicand-infix (x)
   (caddr x))
 
+;;; part B
+;;;  redefine addend augend sum? product? because of
+;;; the priority or + and * operation
+
+(defun sum-infix? (exp)
+  (and (consp exp) (eql (operation exp) '+)))
+
+(defun augend-infix (exp)
+  (let ((aug (cdr (member '+ exp))))
+	(if (null (cdr aug))
+		(car aug)
+		aug)))
+
+(defun addend-infix (exp)
+  (labels ((iter (expr acc)
+			 (if (eql (car expr) '+)
+				 acc
+				 (iter (cdr expr) (append acc (list (car expr)))))))
+	(let ((result (iter exp nil)))
+	  (if (null (cdr result))
+		  (car result)
+		  result))))
+
+
+(defun product-infix? (exp)
+  (and (consp exp) (eql (operation exp) '*)))
+
+(defun multiplicand-infix (exp)
+  (let ((cand (cdr (member '* exp))))
+	(if (null (cdr cand))
+		(car cand)
+		cand)))
+
+(defun multiplier-infix (exp)
+  (labels ((iter (expr acc)
+			 (if (eql (car expr) '*)
+				 acc
+				 (iter (cdr expr) (append acc (list (car expr)))))))
+	(let ((result (iter exp nil)))
+	  (if (null (cdr result))
+		  (car result)
+		  result))))
+
+(defun operation (exp)
+  (if (member '+ exp)
+	  '+
+	  '*))
