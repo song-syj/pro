@@ -58,3 +58,33 @@
 							   (cadr pair))
 					(make-leaf-set (cdr pairs))))))
 
+(defun encode (message tree)
+  (if (null message)
+	  nil
+	  (append (encode-symbol (car message) tree)
+			  (encode (cdr message) tree))))
+
+(defun encode-symbol (symbol tree)
+ (labels ((choose-symbol (symbol tree bits)
+			(if (member symbol (symbols tree))
+				(if (leaf? tree)
+					(reverse bits)
+					(let ((left (left-branch tree))
+						  (right (right-branch tree)))
+					  (cond ((member symbol (symbols left))
+							 (choose-symbol symbol left (cons 0 bits)))
+							(t (choose-symbol symbol right (cons 1 bits))))))
+				(error "bad symbol -- CHOOSE-SYMBOL ~A~%" symbol))))
+   (choose-symbol symbol tree nil)))
+
+(defun generate-huffman-tree (pairs)
+  (successive-merge (make-leaf-set pairs)))
+
+(defun successive-merge (pairs)
+  (if (null (cdr pairs))
+	  (car pairs)
+	  (let ((nod1 (car pairs))
+			(nod2 (cadr pairs)))
+		(successive-merge
+		 (adjoin-set (make-code-tree nod1 nod2)
+					 (cddr pairs))))))
