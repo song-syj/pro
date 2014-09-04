@@ -78,15 +78,55 @@ void SortAges(int ages[], int length)
 	}
 }
 
+int MinInorder(int array[], int start, int end)
+{
+	int min = array[start];
+	for(int i = start+1; i <= end; i++) {
+		if(array[i] < min)
+			min = array[i];
+	}
+
+	return min;
+}
+
+int MinOfRotatingArray(int *array, int length)
+{
+	if(array == NULL || length <= 0) {
+		cerr << "Invalid parameters" << endl;
+		exit(1);
+	}
+
+	int first = 0;
+	int last = length - 1;
+	int mid = first;
+
+	while(array[first] >= array[last]) {
+		if(first+1 == last) {
+			mid = last;
+			break;
+		}
+		mid = (first + last) / 2;
+
+		if(array[mid] == array[first] &&
+				array[mid] == array[last])
+			return MinInorder(array, first, last);
+
+		if(array[mid] >= array[first]) {
+			first = mid;
+		} else if(array[mid] <= array[last]) {
+			last = mid;
+		}
+	}
+
+	return array[mid];
+}
 
 int main()
 {
-	//int data[] = {1, -11, 22, 23, 12, 8}; 
-	int data[] = {1, 2, 1, 11, 9, 2, 8}; 
-	SortAges(data, 7);
-	for(int i = 0; i < 7; i++)
-		cout << data[i] <<" ";
-	cout << endl;
+	int data[] = {3, 4, 5, 6, 7, 2}; 
+	int result = MinOfRotatingArray(data, 6);
+
+	cout << result << endl;
 
 	return 0;
 }
