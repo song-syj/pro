@@ -1,4 +1,4 @@
-SOURCE = 3.cpp
+SOURCE = 8.cpp
 CC = g++
 CFLAG = -Wall -g -std=c++11
 
@@ -16,6 +16,6 @@ $(OBJ): $(SOURCE)
 .PHONY: clean
 
 clean:
-	rm -f $(OBJ) $(TARG)
+	rm -f $(OBJ) $(TARG) *.o
 
 
