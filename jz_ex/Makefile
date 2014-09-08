@@ -1,4 +1,4 @@
-SOURCE = 22.cpp
+SOURCE = 43.cpp
 CC = g++
 CFLAG = -Wall -g -std=c++11
 
