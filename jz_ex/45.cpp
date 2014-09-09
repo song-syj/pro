@@ -1,0 +1,11 @@
+int LastRemaining(unsigned int n, unsigned int m)
+{
+	if(n < 1 || m < 1)
+		return - 1;
+	int last = 0;
+
+	for(int i = 2; i <= n; i++)
+		last = (last+m) % n;
+
+	return last;
+}
