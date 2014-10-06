@@ -13,7 +13,7 @@
 ;; 	(if (null? (car seqs))
 ;; 		nil
 ;; 		(cons (accumulate op init ⟨ ?? ⟩ )
-;; 			  (accumula te-n op init ⟨ ?? ⟩ ))))
+;; 			  (accumulate-n op init ⟨ ?? ⟩ ))))
 
 (defun accumulate-n (op init seqs)
   (if (null (car seqs))
