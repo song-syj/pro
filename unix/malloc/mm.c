@@ -1,4 +1,5 @@
 #include <stddef.h>
+#include<string.h>
 #include <stdio.h>
 #include "memlib.h"
 #include "mm.h"
@@ -26,6 +27,13 @@
 #define NEXT_BLKP(bp) ((char *)(bp) + GET_SIZE(HDRP(bp)))
 #define PREV_BLKP(bp) ((char *)(bp) - GET_SIZE(((char *)(bp) - DSIZE)))
 
+
+#define NEXT_FIT
+
+#ifdef NEXT_FIT
+static char *rover;
+#endif
+
 static char *heap_listp = 0;
 
 static void * extend_heap(size_t words);
@@ -39,6 +47,7 @@ static void place(void *bp, size_t asize);
 int mm_init(void)
 {
 	mem_init();
+
 	if((heap_listp = mem_sbrk(4 * WSIZE)) == (void *)-1)
 		return -1;
 
@@ -47,6 +56,10 @@ int mm_init(void)
 	PUT(heap_listp + (2 * WSIZE), PACK(DSIZE, 1));
 	PUT(heap_listp + (3 * WSIZE), PACK(0, 1));
 	heap_listp += 2 * WSIZE;
+
+#ifdef NEXT_FIT
+	rover = heap_listp;
+#endif
 
 	if(extend_heap(CHUNKSIZE / WSIZE) == NULL) {
 		return -1;
@@ -97,6 +110,11 @@ static void *coalesce(void *bp)
 		PUT(HDRP(bp), PACK(size, 0));
 		PUT(FTRP(bp), PACK(size, 0));
 	}
+
+#ifdef NEXT_FIT
+	if(rover > (char *)bp && rover < NEXT_BLKP(bp))
+		rover = (char *)bp;
+#endif
 	
 	return bp;
 }
@@ -140,16 +158,62 @@ void *mm_malloc(size_t size)
 	return bp;
 }
 
+void *mm_realloc(void *bp, size_t size)
+{
+	size_t old_size;
+	void *new_bp;
+
+	if(size == 0) {
+		mm_free(bp);
+		return NULL;
+	}
+
+	if(bp == NULL) {
+		return mm_malloc(size);
+	}
+
+	new_bp = mm_malloc(size);
+
+	if(new_bp == NULL) {
+		return NULL;
+	}
+
+	old_size = GET_SIZE(HDRP(bp));
+	if(old_size > size) old_size = size;
+	memcpy(new_bp, bp, old_size);
+
+	mm_free(bp);
+
+	return new_bp;
+}
+
 static void * find_fit(size_t asize)
 {
-	void *bp;
 	size_t size;
+
+#ifdef NEXT_FIT
+	char *old_rover = rover;
+	for(; (size = GET_SIZE(HDRP(rover))) > 0; rover = NEXT_BLKP(rover)) {
+		if(size >= asize && !GET_ALLOC(HDRP(rover))) {
+			return rover;
+		}
+	}
+
+	for(rover = heap_listp; rover < old_rover ; rover = NEXT_BLKP(rover)) {
+		if(size >= asize && !GET_ALLOC(HDRP(rover))) {
+			return rover;
+		}
+	}
+	
+#else
+	void *bp;
 
 	for(bp = heap_listp; (size = GET_SIZE((HDRP(bp)))); bp = NEXT_BLKP(bp)) {
 		if(size >= asize && !GET_ALLOC(HDRP(bp))) {
 			return bp;
 		}
 	}
+#endif
 
 	return NULL;
 }

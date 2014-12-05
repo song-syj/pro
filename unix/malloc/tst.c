@@ -3,14 +3,17 @@
 #include<stdlib.h>
 #include<time.h>
 
-int seq[100];
+#define MAX_SEQ_SIZE TEST_SIZE
+#define TEST_SIZE 10
+
+int seq[MAX_SEQ_SIZE];
 
 typedef struct mm_info{
 	char *byte;
 	int size;
 }mm_info;
 
-mm_info mm_tst[100];
+mm_info mm_tst[TEST_SIZE];
 
 
 void rand_seq(int *seq, int size)
@@ -32,15 +35,17 @@ int main()
 {
 	int i;
 	int num1, num2;
-	for(i = 0; i < 100; i++) {
+	void *real_ptr;
+
+	for(i = 0; i < MAX_SEQ_SIZE; i++) {
 		seq[i] = i;
 	}
 
 	mm_init();
 
-	rand_seq(seq, 100);
+	rand_seq(seq, TEST_SIZE);
 
-	for(i = 0; i < 100; i++) {
+	for(i = 0; i < TEST_SIZE; i++) {
 		mm_tst[i].size = seq[i];
 		mm_tst[i].byte = mm_malloc(seq[i]);
 		if(mm_tst[i].byte == NULL) {
@@ -49,19 +54,19 @@ int main()
 		*(int *)mm_tst[i].byte = seq[i];
 	}
 
-	//checkheap(1);
+	checkheap(1);
 
-	rand_seq(seq, 100); 
-	for(i = 0; i < 50; i++) 
+	rand_seq(seq, TEST_SIZE); 
+	for(i = 0; i < TEST_SIZE/ 2; i++) 
 	{ 
 		mm_free(mm_tst[seq[i]].byte);
 	}
 
-	//checkheap(1);
+	checkheap(1);
 
-	rand_seq(seq, 100);
+	rand_seq(seq, TEST_SIZE);
 
-	for(i = 0; i < 100; i++) {
+	for(i = 0; i < TEST_SIZE; i++) {
 		mm_tst[seq[i]].size = 7 *seq[i];
 		mm_tst[seq[i]].byte = mm_malloc(7 * seq[i]);
 		if(mm_tst[seq[i]].byte == NULL) {
@@ -72,13 +77,19 @@ int main()
 
 	checkheap(1);
 
-	for(i = 0; i < 100; i++) {
+	for(i = 0; i < TEST_SIZE; i++) {
 		num1 = mm_tst[seq[i]].size;
 		num2 = *(int *)mm_tst[seq[i]].byte;
 		if(num1 != num2) { printf("mm error!\n");
 			return -1;
 		}
 	}
+
+	real_ptr = (void *)mm_tst[0].byte;
+	printf("before realloc: %p\n", real_ptr);
+	real_ptr = mm_realloc(real_ptr, mm_tst[0].size + 100);
+	printf("after realloc: %p\n", real_ptr);
+	checkheap(1);
 
 
 	printf("not find error!\n");
